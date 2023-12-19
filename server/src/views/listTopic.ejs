@@ -1,0 +1,50 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>List Topics</title>
+    <link rel="stylesheet" href="/css/styles.css" />
+</head>
+
+<body>
+    <div class="topnav">
+        <a href="/">List Users</a>
+        <a class="active" href="/topic">List Topics</a>
+        <a href="/lesson">List Lessons</a>
+    </div>
+    <div>
+        <a href="/create">Create A New Topic</a>
+    </div>
+    <div class="table-container">
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Photo</th>
+                <th>Actions</th>
+            </tr>
+            <% listTopics.forEach(function(topic, index) { %>
+                <tr>
+                    <td>
+                        <%= topic.id %>
+                    </td>
+                    <td>
+                        <%= topic.name %>
+                    </td>
+                    <td>
+                        <%= topic.photo %>
+                    </td>
+                    <td>
+                        <a href="/update/<%= topic.id %>">Edit</a>
+                        <form action="/delete-user/<%= topic.id %>" method="post">
+                            <button>Delete</button>
+                        </form>
+                    </td>
+                </tr>
+                <% }); %>
+        </table>
+    </div>
+</body>
+
+</html>
