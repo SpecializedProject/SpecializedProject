@@ -1,0 +1,84 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>List Users</title>
+    <link rel="stylesheet" href="/css/styles.css" />
+</head>
+
+<body>
+    <div class="topnav">
+        <a class="active" href="/">List Users</a>
+        <a href="/topic">List Topics</a>
+        <a href="/lesson">List Lessons</a>
+    </div>
+    <div class="table-container">
+        <table>
+            <tr>
+                <th>Phone</th>
+                <th>Full Name</th>
+                <th>Photo</th>
+                <th>Email</th>
+                <th>Gender</th>
+                <th>Birthday</th>
+                <th>type</th>
+                <th>Actions</th>
+            </tr>
+            <!-- <% for (let i=0; i < listUsers.length; i++) { %>
+                <tr>
+                    <td>
+                        <%= listUsers[i].id %>
+                    </td>
+                    <td>
+                        <%= listUsers[i].email %>
+                    </td>
+                    <td>
+                        <%= listUsers[i].name %>
+                    </td>
+                    <td>
+                        <%= listUsers[i].city %>
+                    </td>
+                    <td>
+                        <button>Edit</button>
+                        <button>Delete</button>
+                    </td>
+                </tr>
+                <% } %> -->
+
+            <% listUsers.forEach(function(user, index) { %>
+                <tr>
+                    <td>
+                        <%= user.phone %>
+                    </td>
+                    <td>
+                        <%= user.fullName %>
+                    </td>
+                    <td>
+                        <%= user.photo %>
+                    </td>
+                    <td>
+                        <%= user.email %>
+                    </td>
+                    <td>
+                        <%= user.gender %>
+                    </td>
+                    <td>
+                        <%= user.birthday %>
+                    </td>
+                    <td>
+                        <%= user.type %>
+                    </td>
+                    <td>
+                        <a href="/update/<%= user.id %>">Edit</a>
+                        <form action="/delete-user/<%= user.id %>" method="post">
+                            <button>Delete</button>
+                        </form>
+                    </td>
+                </tr>
+                <% }); %>
+        </table>
+    </div>
+</body>
+
+</html>
