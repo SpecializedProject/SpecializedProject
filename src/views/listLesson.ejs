@@ -1,0 +1,77 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>List Lessons</title>
+    <link rel="stylesheet" href="/css/styles.css" />
+</head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $(".btnDelete").click(function () {
+            const id = $(this).attr('data-id');
+            if (confirm(`Are you sure to delete this Lesson with ID = ${id}`)) {
+                $.ajax({
+                    url: `${window.location.origin}/api/delete-lesson/${id}`,
+                    method: "DELETE",
+                    success: (result) => {
+                        console.log(result);
+                        $(this).closest("tr").remove();
+                    },
+                    error: function (error) {
+                        console.log(">>> ajax error: ", error)
+                    }
+                });
+            } else {
+                // Do nothing!
+            }
+        });
+    });
+</script>
+
+<body>
+    <div class="topnav">
+        <a href="/">List Users</a>
+        <a href="/topic">List Topics</a>
+        <a class="active" href="/lesson">List Lessons</a>
+    </div>
+    <div>
+        <a class="btnCreate" href="/create">Create A New Lesson</a>
+    </div>
+    <div class="table-container">
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Photo</th>
+                <th>Topic_id</th>
+                <th>Actions</th>
+            </tr>
+            <% listLessons.forEach(function(lesson, index) { %>
+                <tr>
+                    <td>
+                        <%= lesson.id %>
+                    </td>
+                    <td>
+                        <%= lesson.name %>
+                    </td>
+                    <td>
+                        <%= lesson.photo %>
+                    </td>
+                    <td>
+                        <%= lesson.topic_id %>
+                    </td>
+                    <td>
+                        <button>Edit</button>
+                        <button class="btnDelete" data-id="<%= lesson.id %>">Delete</button>
+                        <!-- <a href="/update/<%= lesson.id %>">Edit</a>
+                    </td>
+                </tr>
+                <% }); %>
+        </table>
+    </div>
+</body>
+
+</html>
